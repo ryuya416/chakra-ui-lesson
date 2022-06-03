@@ -1,8 +1,10 @@
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
+import { useMessage } from "./useMessage";
 
 export const useAuth = () => {
   const router = useRouter();
+  const { showMessage } = useMessage();
 
   const [loading, setLoading] = useState(false);
 
@@ -16,12 +18,11 @@ export const useAuth = () => {
       console.log(data);
       try {
         if (data) {
+          showMessage({ title: "ログインしました", status: "success" });
           router.push("/home");
-        } else {
-          console.log("ログイン失敗");
         }
       } catch (error) {
-        alert("ユーザーが見つかりません");
+        showMessage({ title: "ログインに失敗しました", status: "error" });
       }
       return data;
     },
