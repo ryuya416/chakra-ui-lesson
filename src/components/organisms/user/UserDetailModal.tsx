@@ -16,14 +16,14 @@ import { User } from "../../../types/api/user";
 import { PrimaryButton } from "../../atoms/button/PrimaryButton";
 
 type Props = {
-  user: User | null;
+  data: User | null;
   isOpen: boolean;
   isAdmin?: boolean;
   onClose: () => void;
 };
 
 export const UserDetailModal: FC<Props> = (props) => {
-  const { user, isOpen, isAdmin = false, onClose } = props;
+  const { data, isOpen, isAdmin = false, onClose } = props;
 
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
@@ -31,11 +31,11 @@ export const UserDetailModal: FC<Props> = (props) => {
   const [phone, setPhone] = useState("");
 
   useEffect(() => {
-    setUsername(user?.username ?? "");
-    setName(user?.name ?? "");
-    setEmail(user?.email ?? "");
-    setPhone(user?.phone ?? "");
-  }, [user]);
+    setUsername(data?.username ?? "");
+    setName(data?.name ?? "");
+    setEmail(data?.email ?? "");
+    setPhone(data?.phone ?? "");
+  }, [data]);
 
   const onChangeUserName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
